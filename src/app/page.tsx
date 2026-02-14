@@ -5,6 +5,7 @@ import EventMenu from "@/components/EventMenu";
 import BirthdayGame from "@/components/BirthdayGame";
 import MesarioGame from "@/components/MesarioGame";
 import Mesario2Game from "@/components/Mesario2Game";
+import ValentineGame from "@/components/ValentineGame";
 import { EventType } from "@/config/events";
 
 export default function Home() {
@@ -47,6 +48,15 @@ export default function Home() {
       <div>
         <BackButton onClick={handleBackToMenu} />
         <Mesario2Game />
+      </div>
+    );
+  }
+
+  if (selectedEvent === 'sanvalentin') {
+    return (
+      <div>
+        <BackButton onClick={handleBackToMenu} />
+        <ValentineGame />
       </div>
     );
   }

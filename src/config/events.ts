@@ -1,4 +1,4 @@
-export type EventType = 'mesario' | 'mesario2' | 'cumpleanos';
+export type EventType = 'mesario' | 'mesario2' | 'cumpleanos' | 'sanvalentin';
 
 export interface EventConfig {
   id: EventType;
@@ -33,6 +33,14 @@ export const events: EventConfig[] = [
     subtitle: '¡Feliz cumpleaños, mi amor!',
     emoji: '🎂',
     color: 'from-purple-500 to-pink-500',
+  },
+  {
+    id: 'sanvalentin',
+    date: '14/02/2026',
+    title: 'San Valentín',
+    subtitle: 'Nuestro primer 14 de febrero juntos',
+    emoji: '❤️',
+    color: 'from-rose-500 to-red-500',
   },
 ];
 

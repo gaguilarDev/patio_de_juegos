@@ -120,7 +120,7 @@ function EventCard({ event, index, onSelect }: EventCardProps) {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className={`px-8 py-3 bg-gradient-to-r ${event.color} rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
+            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Celebrar 🎉
           </motion.button>
