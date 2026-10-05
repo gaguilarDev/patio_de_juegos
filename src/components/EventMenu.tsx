@@ -41,7 +41,11 @@ export default function EventMenu({ onSelectEvent }: EventMenuProps) {
               key={event.id}
               event={event}
               index={index}
-              onSelect={() => onSelectEvent(event.id)}
+              onSelect={() =>
+                event.href
+                  ? window.location.assign(event.href)
+                  : onSelectEvent(event.id)
+              }
             />
           ))}
         </div>
@@ -122,7 +126,7 @@ function EventCard({ event, index, onSelect }: EventCardProps) {
             whileTap={{ scale: 0.9 }}
             className="px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Celebrar 🎉
+            {event.href ? "Abrir ✨" : "Celebrar 🎉"}
           </motion.button>
         </div>
       </div>

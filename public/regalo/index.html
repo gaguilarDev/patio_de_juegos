@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Un regalo interactivo de geometría sagrada, fractales y reflexiones profundas.">
+    <title>Geometría del Alma</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <a href="/" class="back-home" aria-label="Volver al menú">← Menú</a>
+    <div class="app-container">
+        <!-- Split View Layout -->
+        <main class="split-view">
+            <!-- Left Side: Canvas Drawing Area -->
+            <section class="canvas-section">
+                <canvas id="mandalaCanvas"></canvas>
+                <div class="canvas-hint" id="canvasHint">Mueve el cursor o toca para interactuar</div>
+            </section>
+
+            <!-- Right Side: Content Area (Quotes & Title) -->
+            <section class="text-section">
+                <!-- Header -->
+                <header class="header">
+                    <h1 class="title">Geometría del Alma</h1>
+                    <p class="subtitle">pOR NUESTROS 8 MESESOTES</p>
+                </header>
+
+                <!-- Quote Card Container -->
+                <div class="quote-card-container">
+                    <div class="quote-card" id="quoteCard">
+                        <span class="quote-decorator">“</span>
+                        <blockquote class="quote-text" id="quoteText">
+                            Una nan feliz es lo mejor el mundo entero, que todos los días sean tan hermosos como hoy y
+                            que sigamos siendo felices por siempre.
+                        </blockquote>
+                        <cite class="quote-author" id="quoteAuthor">Gus, tu extraterrestre favorito</cite>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Control Center (Glassmorphic Toolbar) -->
+        <nav class="controls-toolbar" aria-label="Controles de la experiencia">
+            <!-- Left Group: Draw and Math Controls -->
+            <div class="control-group">
+                <!-- Toggle Auto (Icon Only) -->
+                <button id="toggleAuto" class="btn btn-icon btn-circular" title="Pausar/Reproducir Danza"
+                    aria-label="Pausar/Reproducir Danza">
+                    <svg class="icon" viewBox="0 0 24 24" id="playIcon">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <svg class="icon hidden" viewBox="0 0 24 24" id="pauseIcon">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                </button>
+
+                <!-- Mode Select Buttons -->
+                <button id="modeMandala" class="btn btn-secondary active" title="Activar Modo Mándala"
+                    aria-label="Activar Modo Mándala">Mándala</button>
+                <button id="modeFractal" class="btn btn-secondary" title="Activar Modo Fractal"
+                    aria-label="Activar Modo Fractal">Fractal</button>
+
+                <!-- Cycle Designs Button -->
+                <button id="nextDesign" class="btn btn-icon" title="Siguiente Diseño / Forma"
+                    aria-label="Siguiente Diseño / Forma">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <!-- Magic Wand / Sparkles representation -->
+                        <path d="M12 2L2 22h20L12 2zm0 4l6.5 11h-13L12 6z" />
+                    </svg>
+                    <span class="btn-text" id="designText"><span class="btn-label-word">Diseño: </span><span
+                            class="btn-number">1/6</span></span>
+                </button>
+            </div>
+
+            <!-- Right Group: Quotes Control -->
+            <div class="control-group">
+                <!-- Next Quote Button (Icon Only) -->
+                <button id="nextQuote" class="btn btn-icon btn-circular btn-secondary" title="Siguiente pensamiento"
+                    aria-label="Siguiente pensamiento">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <!-- Chevron Right -->
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-export type EventType = 'mesario' | 'mesario2' | 'cumpleanos' | 'sanvalentin';
+export type EventType = 'mesario' | 'mesario2' | 'cumpleanos' | 'sanvalentin' | 'ochomeses' | 'invitaciones';
 
 export interface EventConfig {
   id: EventType;
@@ -7,6 +7,8 @@ export interface EventConfig {
   subtitle: string;
   emoji: string;
   color: string;
+  /** Si existe, la tarjeta navega a esta ruta en vez de abrir un juego interno. */
+  href?: string;
 }
 
 export const events: EventConfig[] = [
@@ -42,5 +44,22 @@ export const events: EventConfig[] = [
     emoji: '❤️',
     color: 'from-rose-500 to-red-500',
   },
+  {
+    id: 'ochomeses',
+    date: '27/08/2026',
+    title: 'Geometría del Alma',
+    subtitle: 'Nuestros 8 mesesotes',
+    emoji: '🔮',
+    color: 'from-violet-500 to-fuchsia-500',
+    href: '/regalo/index.html',
+  },
+  {
+    id: 'invitaciones',
+    date: 'Siempre',
+    title: 'Cartas de Invitación',
+    subtitle: 'Crea una invitación con tu canción y tu mensaje',
+    emoji: '💌',
+    color: 'from-amber-400 to-rose-500',
+    href: '/invitaciones',
+  },
 ];
-

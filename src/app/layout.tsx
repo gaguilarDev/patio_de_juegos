@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
+import { Great_Vibes, Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
+const script = Great_Vibes({ weight: "400", subsets: ["latin"], variable: "--font-script" });
+const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
+const sans = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
+
 export const metadata: Metadata = {
-  title: "Feliz mesario amor",
-  description:
-    "Juego para emparejar cards y divertirte un poco viendo nuestras fotos",
-  keywords: [
-    "Mesario card game",
-    "romantic proposal game",
-    "photo card challenge",
-    "Mesario Day surprise",
-    "couples game",
-    "Mesario day game",
-    "proposal game",
-  ],
+  title: "Patio de Juegos 💖",
+  description: "Juegos, sorpresas y cartas de invitación para fechas especiales.",
 };
 
 export default function RootLayout({
@@ -22,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="es">
+      <body className={`${script.variable} ${serif.variable} ${sans.variable}`}>{children}</body>
     </html>
   );
 }
