@@ -98,7 +98,13 @@ export default function PhotoPairGame({
 
   const handleClick = (index: number) => {
     // Prevent clicks while checking or if already selected/matched
-    if (isChecking || selected.includes(index) || matched.includes(index) || selected.length >= 2) return;
+    if (
+      isChecking ||
+      selected.includes(index) ||
+      matched.includes(index) ||
+      selected.length >= 2
+    )
+      return;
 
     const newSelected = [...selected, index];
     setSelected(newSelected);
@@ -107,7 +113,7 @@ export default function PhotoPairGame({
     if (newSelected.length === 2) {
       setIsChecking(true);
       const [firstIndex, secondIndex] = newSelected;
-      
+
       if (images[firstIndex] === images[secondIndex]) {
         // Match found
         setTimeout(() => {
@@ -144,15 +150,10 @@ export default function PhotoPairGame({
   return (
     <>
       {/* Audio player */}
-      <audio
-        ref={audioRef}
-        src="/music/background.mp3"
-        loop
-        preload="auto"
-      />
+      <audio ref={audioRef} src="/music/background.mp3" loop preload="auto" />
 
       {/* Music controls */}
-      <div 
+      <div
         className="fixed top-5 right-5 z-50 flex items-center gap-2"
         onMouseEnter={() => setShowVolumeSlider(true)}
         onMouseLeave={() => setShowVolumeSlider(false)}
@@ -160,9 +161,9 @@ export default function PhotoPairGame({
         {/* Volume slider */}
         <motion.div
           initial={{ width: 0, opacity: 0 }}
-          animate={{ 
+          animate={{
             width: showVolumeSlider ? 120 : 0,
-            opacity: showVolumeSlider ? 1 : 0
+            opacity: showVolumeSlider ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
           className="overflow-hidden"
@@ -176,7 +177,7 @@ export default function PhotoPairGame({
             onChange={handleVolumeChange}
             className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
             style={{
-              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`
+              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
             }}
           />
         </motion.div>
@@ -188,13 +189,40 @@ export default function PhotoPairGame({
           aria-label="Toggle music"
         >
           {isMusicPlaying ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+              />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
+              />
             </svg>
           )}
         </button>
@@ -203,77 +231,69 @@ export default function PhotoPairGame({
       <div className="grid grid-cols-9 gap-2">
         {/* Image preload */}
         <div className="hidden">
-        {images.map((image, i) => (
-          <Image
-            key={i}
-            src={image}
-            alt={`Image ${i + 1}`}
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-        ))}
-      </div>
+          {images.map((image, i) => (
+            <Image key={i} src={image} alt="" width={80} height={80} priority />
+          ))}
+        </div>
 
-      {heartLayout.flat().map((index, i) =>
-        index !== null ? (
-          <motion.div
-            key={i}
-            className="w-20 h-20 relative cursor-pointer"
-            whileHover={{ scale: 1.1 }}
-            onClick={() => handleClick(index)}
-            style={{ perspective: "1000px" }} // Add perspective for 3D effect
-          >
-            {/* Back of the card */}
-            {!selected.includes(index) && !matched.includes(index) && (
-              <motion.div
-                className="w-full h-full bg-gray-300 rounded-md absolute"
-                initial={{ rotateY: 0 }}
-                animate={{
-                  rotateY:
-                    selected.includes(index) || matched.includes(index)
-                      ? 180
-                      : 0,
-                }}
-                transition={{ duration: 0.5 }}
-                style={{ backfaceVisibility: "hidden" }}
-              />
-            )}
-
-            {/* Front of the card (image) */}
-            {(selected.includes(index) || matched.includes(index)) && (
-              <motion.div
-                className="w-full h-full absolute"
-                initial={{ rotateY: -180 }}
-                animate={{ rotateY: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{ backfaceVisibility: "hidden" }}
-              >
-                <Image
-                  src={images[index]}
-                  alt={`Imagen ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-md"
+        {heartLayout.flat().map((index, i) =>
+          index !== null ? (
+            <motion.div
+              key={i}
+              className="w-20 h-20 relative cursor-pointer"
+              whileHover={{ scale: 1.1 }}
+              onClick={() => handleClick(index)}
+              style={{ perspective: "1000px" }} // Add perspective for 3D effect
+            >
+              {/* Back of the card */}
+              {!selected.includes(index) && !matched.includes(index) && (
+                <motion.div
+                  className="w-full h-full bg-gray-300 rounded-md absolute"
+                  initial={{ rotateY: 0 }}
+                  animate={{
+                    rotateY:
+                      selected.includes(index) || matched.includes(index)
+                        ? 180
+                        : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                  style={{ backfaceVisibility: "hidden" }}
                 />
-              </motion.div>
-            )}
+              )}
 
-            {/* Incorrect animation */}
-            {incorrect.includes(index) && (
-              <motion.div
-                className="absolute inset-0"
-                animate={{ scale: [1, 1.1, 1], opacity: [1, 0, 1] }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="w-full h-full bg-red-500 rounded-md"></div>
-              </motion.div>
-            )}
-          </motion.div>
-        ) : (
-          <div key={i} className="w-20 h-20"></div>
-        )
-      )}
+              {/* Front of the card (image) */}
+              {(selected.includes(index) || matched.includes(index)) && (
+                <motion.div
+                  className="w-full h-full absolute"
+                  initial={{ rotateY: -180 }}
+                  animate={{ rotateY: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ backfaceVisibility: "hidden" }}
+                >
+                  <Image
+                    src={images[index]}
+                    alt={`Imagen ${index + 1}`}
+                    fill
+                    className="rounded-md object-cover"
+                  />
+                </motion.div>
+              )}
+
+              {/* Incorrect animation */}
+              {incorrect.includes(index) && (
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{ scale: [1, 1.1, 1], opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-full h-full bg-red-500 rounded-md"></div>
+                </motion.div>
+              )}
+            </motion.div>
+          ) : (
+            <div key={i} className="w-20 h-20"></div>
+          ),
+        )}
       </div>
     </>
   );

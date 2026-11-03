@@ -1,65 +1,69 @@
-export type EventType = 'mesario' | 'mesario2' | 'cumpleanos' | 'sanvalentin' | 'ochomeses' | 'invitaciones';
+export type PlayableGameId =
+  "mesario" | "mesario2" | "cumpleanos" | "sanvalentin";
+export type GameId = PlayableGameId | "ochomeses";
 
 export interface EventConfig {
-  id: EventType;
+  id: GameId;
   date: string;
   title: string;
   subtitle: string;
   emoji: string;
+  /** Paradas del gradiente de Tailwind, por ejemplo "from-pink-500 to-rose-500". */
   color: string;
-  /** Si existe, la tarjeta navega a esta ruta en vez de abrir un juego interno. */
+  badge: string;
+  /** Si existe, la tarjeta abre esta ruta en vez de /juegos/[id]. */
   href?: string;
 }
 
-export const events: EventConfig[] = [
+export const games: EventConfig[] = [
   {
-    id: 'mesario',
-    date: '27/12/2025',
-    title: 'Nuestro Primer Mes',
-    subtitle: 'Celebrando un mes juntos',
-    emoji: '💕',
-    color: 'from-pink-500 to-rose-500',
+    id: "mesario",
+    date: "27/12/2025",
+    title: "Nuestro Primer Mes",
+    subtitle: "Un juego de memoria con nuestras fotos",
+    emoji: "💕",
+    color: "from-pink-500 to-rose-500",
+    badge: "Juego",
   },
   {
-    id: 'mesario2',
-    date: '27/02/2026',
-    title: 'Nuestro Segundo Mes',
-    subtitle: 'Celebrando dos meses juntos',
-    emoji: '💝',
-    color: 'from-red-500 to-pink-500',
+    id: "mesario2",
+    date: "27/02/2026",
+    title: "Nuestro Segundo Mes",
+    subtitle: "Ordena las palabras y descubre el mensaje",
+    emoji: "💝",
+    color: "from-red-500 to-pink-500",
+    badge: "Juego",
   },
   {
-    id: 'cumpleanos',
-    date: '21/01/2026',
-    title: 'Tu Cumpleaños',
-    subtitle: '¡Feliz cumpleaños, mi amor!',
-    emoji: '🎂',
-    color: 'from-purple-500 to-pink-500',
+    id: "cumpleanos",
+    date: "21/01/2026",
+    title: "Tu Cumpleaños",
+    subtitle: "Un rompecabezas y un cuestionario sobre nosotros",
+    emoji: "🎂",
+    color: "from-purple-500 to-pink-500",
+    badge: "Juego y cuestionario",
   },
   {
-    id: 'sanvalentin',
-    date: '14/02/2026',
-    title: 'San Valentín',
-    subtitle: 'Nuestro primer 14 de febrero juntos',
-    emoji: '❤️',
-    color: 'from-rose-500 to-red-500',
+    id: "sanvalentin",
+    date: "14/02/2026",
+    title: "San Valentín",
+    subtitle: "Un sudoku para nuestro primer 14 de febrero",
+    emoji: "❤️",
+    color: "from-rose-500 to-red-500",
+    badge: "Juego",
   },
   {
-    id: 'ochomeses',
-    date: '27/08/2026',
-    title: 'Geometría del Alma',
-    subtitle: 'Nuestros 8 mesesotes',
-    emoji: '🔮',
-    color: 'from-violet-500 to-fuchsia-500',
-    href: '/regalo/index.html',
-  },
-  {
-    id: 'invitaciones',
-    date: 'Siempre',
-    title: 'Cartas de Invitación',
-    subtitle: 'Crea una invitación con tu canción y tu mensaje',
-    emoji: '💌',
-    color: 'from-amber-400 to-rose-500',
-    href: '/invitaciones',
+    id: "ochomeses",
+    date: "27/08/2026",
+    title: "Geometría del Alma",
+    subtitle: "Nuestros 8 mesesotes",
+    emoji: "🔮",
+    color: "from-violet-500 to-fuchsia-500",
+    badge: "Experiencia",
+    href: "/regalo/index.html",
   },
 ];
+
+export function getPlayableGame(id: string): EventConfig | undefined {
+  return games.find((game) => game.id === id && !game.href);
+}

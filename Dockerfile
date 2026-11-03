@@ -1,6 +1,6 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN npm i -g pnpm && pnpm install --frozen-lockfile --config.strict-dep-builds=false
 
 FROM node:22-alpine AS build

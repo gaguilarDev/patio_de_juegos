@@ -29,12 +29,15 @@ export const AUDIO_TYPES: Record<string, string> = {
   "audio/webm": "webm",
 };
 
-const DATA_DIR = path.resolve(process.env.DATA_DIR ?? "./data");
+const DATA_DIR = path.resolve(
+  /*turbopackIgnore: true*/ process.env.DATA_DIR ?? "./data",
+);
 const CARDS_DIR = path.join(DATA_DIR, "cards");
 const ID_RE = /^[A-Za-z0-9_-]{8,32}$/;
 
 export const isValidId = (id: string) => ID_RE.test(id);
-export const cardPath = (id: string, file: string) => path.join(CARDS_DIR, id, file);
+export const cardPath = (id: string, file: string) =>
+  path.join(CARDS_DIR, id, file);
 
 export function checkAdmin(password: string | null): boolean {
   const expected = process.env.ADMIN_PASSWORD;
@@ -51,24 +54,49 @@ export async function saveCard(
   ext: string,
 ): Promise<Card> {
   const id = randomBytes(9).toString("base64url");
-  const card: Card = { ...data, id, audioFile: `song.${ext}`, createdAt: new Date().toISOString() };
+  const card: Card = {
+    ...data,
+    id,
+    audioFile: `song.${ext}`,
+    createdAt: new Date().toISOString(),
+  };
   const dir = path.join(CARDS_DIR, id);
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.join(dir, card.audioFile), audio);
-  await fs.writeFile(path.join(dir, "card.json"), JSON.stringify(card, null, 2));
+  await fs.writeFile(
+    path.join(dir, "card.json"),
+    JSON.stringify(card, null, 2),
+  );
   return card;
 }
 
 export async function getCard(id: string): Promise<Card | null> {
   if (!isValidId(id)) return null;
   try {
-    return JSON.parse(await fs.readFile(path.join(CARDS_DIR, id, "card.json"), "utf-8")) as Card;
+    return JSON.parse(
+      await fs.readFile(path.join(CARDS_DIR, id, "card.json"), "utf-8"),
+    ) as Card;
   } catch {
     return null;
   }
 }
 
-export type PublicCard = Pick<Card, "id" | "title" | "message" | "from" | "to" | "theme">;
-export const toPublic = ({ id, title, message, from, to, theme }: Card): PublicCard => ({
-  id, title, message, from, to, theme,
+export type PublicCard = Pick<
+  Card,
+  "id" | "title" | "message" | "from" | "to" | "theme"
+>;
+export const toPublic = ({
+  id,
+  title,
+  message,
+  from,
+  to,
+  theme,
+}: Card): PublicCard => ({
+  id,
+  title,
+  message,
+  from,
+  to,
+  theme,
 });

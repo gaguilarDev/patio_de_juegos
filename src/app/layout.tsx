@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
 import { Great_Vibes, Montserrat, Playfair_Display } from "next/font/google";
+import MotionRoot from "@/components/shared/MotionRoot";
 import "./globals.css";
 
-const script = Great_Vibes({ weight: "400", subsets: ["latin"], variable: "--font-script" });
-const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
+const script = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-script",
+});
+const serif = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
 const sans = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Patio de Juegos 💖",
-  description: "Juegos, sorpresas y cartas de invitación para fechas especiales.",
+  description:
+    "Juegos, sorpresas y cartas de invitación para fechas especiales.",
 };
 
 export default function RootLayout({
@@ -18,7 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${script.variable} ${serif.variable} ${sans.variable}`}>{children}</body>
+      <body
+        className={`${script.variable} ${serif.variable} ${sans.variable} antialiased`}
+      >
+        <MotionRoot>{children}</MotionRoot>
+      </body>
     </html>
   );
 }

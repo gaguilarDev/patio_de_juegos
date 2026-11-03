@@ -1,135 +1,126 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { events, EventConfig } from "@/config/events";
-import SnowFall from "./shared/SnowFall";
+import type { EventConfig } from "@/config/events";
+import AmbientScene from "./shared/AmbientScene";
+import BackLink from "./shared/BackLink";
 
 type EventMenuProps = {
-  onSelectEvent: (eventId: string) => void;
+  title: string;
+  subtitle: string;
+  items: EventConfig[];
+  backHref?: string;
+  backLabel?: string;
 };
 
-export default function EventMenu({ onSelectEvent }: EventMenuProps) {
+export default function EventMenu({
+  title,
+  subtitle,
+  items,
+  backHref,
+  backLabel,
+}: EventMenuProps) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black relative px-4">
-      <SnowFall />
+    <div className="relative flex min-h-screen items-center justify-center bg-black px-4 py-16">
+      <AmbientScene />
+      {backHref && backLabel ? (
+        <BackLink href={backHref} label={backLabel} />
+      ) : null}
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 max-w-4xl w-full"
+        transition={{ type: "spring", stiffness: 80, damping: 16 }}
+        className="relative z-10 w-full max-w-5xl"
       >
-        {/* Header */}
-        <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-6xl font-bold text-white mb-4">
-            Celebraciones Especiales 💖
+        <header className="mb-12 text-center">
+          <h1 className="font-script text-6xl text-white sm:text-7xl">
+            {title}
           </h1>
-          <p className="text-xl text-white/80">
-            Selecciona qué fecha quieres celebrar
-          </p>
-        </motion.div>
+          <p className="mt-3 text-lg text-white/75">{subtitle}</p>
+        </header>
 
-        {/* Event Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {events.map((event, index) => (
-            <EventCard
-              key={event.id}
-              event={event}
-              index={index}
-              onSelect={() =>
-                event.href
-                  ? window.location.assign(event.href)
-                  : onSelectEvent(event.id)
-              }
-            />
+        <div className="grid gap-6 md:grid-cols-2">
+          {items.map((event, index) => (
+            <EventCard key={event.id} event={event} index={index} />
           ))}
         </div>
-
-        {/* Footer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="text-center text-white/60 text-sm mt-12"
-        >
-          Cada fecha tiene su propia sorpresa especial ✨
-        </motion.p>
       </motion.div>
     </div>
   );
 }
 
-type EventCardProps = {
-  event: EventConfig;
-  index: number;
-  onSelect: () => void;
-};
-
-function EventCard({ event, index, onSelect }: EventCardProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
+function EventCard({ event, index }: { event: EventConfig; index: number }) {
+  const card = (
+    <motion.article
+      initial={{ opacity: 0, y: 36 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 + index * 0.2, duration: 0.6 }}
-      whileHover={{ scale: 1.05, y: -10 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onSelect}
-      className="cursor-pointer"
+      transition={{
+        type: "spring",
+        stiffness: 70,
+        damping: 14,
+        delay: 0.08 + index * 0.07,
+      }}
+      whileHover={{ y: -8 }}
+      whileTap={{ scale: 0.985 }}
+      className="group h-full"
     >
-      <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 shadow-2xl hover:shadow-pink-500/20">
-        {/* Emoji */}
-        <div className="text-center mb-6">
+      <div className="relative h-full overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-xl transition duration-300 group-hover:border-white/40 group-hover:shadow-pink-500/20">
+        <span className="card-shine" />
+        <div className="relative text-center">
           <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 10, -10, 0],
-            }}
+            aria-hidden="true"
+            className="mb-5 text-7xl"
+            animate={{ y: [0, -6, 0] }}
             transition={{
-              duration: 2,
+              duration: 3.6,
               repeat: Infinity,
-              repeatDelay: 1,
+              ease: "easeInOut",
+              delay: index * 0.25,
             }}
-            className="text-8xl"
           >
             {event.emoji}
           </motion.div>
-        </div>
 
-        {/* Date Badge */}
-        <div className="flex justify-center mb-4">
-          <div className={`bg-gradient-to-r ${event.color} px-4 py-2 rounded-full`}>
-            <p className="text-white font-semibold text-sm">
-              📅 {event.date}
-            </p>
+          <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+            <span
+              className={`rounded-full bg-gradient-to-r ${event.color} px-4 py-1.5 text-sm font-semibold text-white`}
+            >
+              {event.date}
+            </span>
+            <span className="rounded-full bg-white/15 px-3 py-1.5 text-sm text-white/90">
+              {event.badge}
+            </span>
           </div>
-        </div>
 
-        {/* Title */}
-        <h2 className="text-3xl font-bold text-white text-center mb-2">
-          {event.title}
-        </h2>
+          <h2 className="text-3xl font-bold text-white">{event.title}</h2>
+          <p className="mb-6 mt-2 text-white/70">{event.subtitle}</p>
 
-        {/* Subtitle */}
-        <p className="text-white/70 text-center mb-6">
-          {event.subtitle}
-        </p>
-
-        {/* Button */}
-        <div className="flex justify-center">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+          <span
+            className={`inline-flex rounded-xl bg-gradient-to-r ${event.color} px-8 py-3 font-semibold text-white shadow-lg`}
           >
-            {event.href ? "Abrir ✨" : "Celebrar 🎉"}
-          </motion.button>
+            {event.href ? "Abrir" : "Jugar"}
+          </span>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
+  );
+
+  const className =
+    "block h-full rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pink-300";
+
+  if (event.href) {
+    return (
+      <a href={event.href} className={className}>
+        {card}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={`/juegos/${event.id}`} className={className}>
+      {card}
+    </Link>
   );
 }
