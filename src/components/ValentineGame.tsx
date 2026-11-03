@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import SudokuGame from "./games/SudokuGame";
 import SudokuVictory from "./shared/SudokuVictory";
-import SnowFall from "./shared/SnowFall";
 
 const ANIM_DURATION = 2;
 
@@ -20,8 +19,7 @@ export default function ValentineGame() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black relative px-10">
-      <SnowFall />
+    <div className="relative flex min-h-screen items-center justify-center px-10 py-16">
       {!showVictory ? (
         <motion.div
           initial={{ opacity: 1 }}

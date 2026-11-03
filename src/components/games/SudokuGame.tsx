@@ -22,7 +22,7 @@ const PUZZLES: Record<Difficulty, SudokuPuzzle> = {
       [7, 0, 0, 0, 2, 0, 0, 0, 6],
       [0, 6, 0, 0, 0, 0, 2, 8, 0],
       [0, 0, 0, 4, 1, 9, 0, 0, 5],
-      [0, 0, 0, 0, 8, 0, 0, 7, 9]
+      [0, 0, 0, 0, 8, 0, 0, 7, 9],
     ],
     solution: [
       [5, 3, 4, 6, 7, 8, 9, 1, 2],
@@ -33,8 +33,8 @@ const PUZZLES: Record<Difficulty, SudokuPuzzle> = {
       [7, 1, 3, 9, 2, 4, 8, 5, 6],
       [9, 6, 1, 5, 3, 7, 2, 8, 4],
       [2, 8, 7, 4, 1, 9, 6, 3, 5],
-      [3, 4, 5, 2, 8, 6, 1, 7, 9]
-    ]
+      [3, 4, 5, 2, 8, 6, 1, 7, 9],
+    ],
   },
   intermediate: {
     initial: [
@@ -46,7 +46,7 @@ const PUZZLES: Record<Difficulty, SudokuPuzzle> = {
       [0, 0, 8, 0, 0, 0, 0, 1, 3],
       [0, 0, 0, 0, 2, 0, 0, 0, 0],
       [0, 0, 9, 8, 0, 0, 0, 3, 6],
-      [0, 0, 0, 3, 0, 6, 0, 9, 0]
+      [0, 0, 0, 3, 0, 6, 0, 9, 0],
     ],
     solution: [
       [1, 2, 3, 6, 7, 8, 9, 4, 5],
@@ -57,9 +57,9 @@ const PUZZLES: Record<Difficulty, SudokuPuzzle> = {
       [4, 5, 8, 7, 9, 2, 6, 1, 3],
       [8, 3, 6, 9, 2, 4, 1, 5, 7],
       [2, 1, 9, 8, 5, 7, 4, 3, 6],
-      [7, 4, 5, 3, 1, 6, 8, 9, 2]
-    ]
-  }
+      [7, 4, 5, 3, 1, 6, 8, 9, 2],
+    ],
+  },
 };
 
 type Question = {
@@ -72,33 +72,38 @@ const QUESTIONS: Question[] = [
   {
     question: "¿Cuál es mi apodo favorito para ti?",
     options: ["Bebé", "Nanpache", "Amor", "Tetela"],
-    correct: 1
+    correct: 1,
   },
   {
     question: "¿En qué ciudad nos conocimos?",
     options: ["Lima", "Arequipa", "Cusco", "Tetela"],
-    correct: 1
+    correct: 1,
   },
   {
     question: "¿En qué fecha es nuestro primer mesario?",
-    options: ["27 de enero", "14 de febrero", "27 de diciembre", "25 de diciembre"],
-    correct: 2
+    options: [
+      "27 de enero",
+      "14 de febrero",
+      "27 de diciembre",
+      "25 de diciembre",
+    ],
+    correct: 2,
   },
   {
     question: "¿Cómo me haces sentir cada día?",
     options: ["Triste", "Normal", "Feliz", "Cansado"],
-    correct: 2
+    correct: 2,
   },
   {
     question: "¿Qué es lo que más me gusta de ti?",
     options: ["Tu risa", "Tus ojos", "Tu forma de ser", "Todo de ti"],
-    correct: 3
+    correct: 3,
   },
   {
     question: "¿Cuál es nuestra palabra especial?",
     options: ["Siempre", "Amor", "Lofiu", "Eterno"],
-    correct: 0
-  }
+    correct: 0,
+  },
 ];
 
 type SudokuGameProps = {
@@ -108,14 +113,16 @@ type SudokuGameProps = {
 export default function SudokuGame({ onComplete }: SudokuGameProps) {
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const [grid, setGrid] = useState<number[][]>([]);
-  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
+  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(
+    null,
+  );
   const [showHelp, setShowHelp] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [helpSuccess, setHelpSuccess] = useState(false);
 
   useEffect(() => {
     if (difficulty) {
-      setGrid(PUZZLES[difficulty].initial.map(row => [...row]));
+      setGrid(PUZZLES[difficulty].initial.map((row) => [...row]));
     }
   }, [difficulty]);
 
@@ -128,7 +135,7 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
   const handleNumberInput = (num: number) => {
     if (selectedCell) {
       const [row, col] = selectedCell;
-      const newGrid = grid.map(r => [...r]);
+      const newGrid = grid.map((r) => [...r]);
       newGrid[row][col] = num;
       setGrid(newGrid);
 
@@ -151,7 +158,8 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
   };
 
   const handleHelp = () => {
-    const randomQuestion = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+    const randomQuestion =
+      QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
     setCurrentQuestion(randomQuestion);
     setShowHelp(true);
   };
@@ -184,11 +192,12 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
     }
 
     if (emptyCells.length > 0) {
-      const [row, col] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      const newGrid = grid.map(r => [...r]);
+      const [row, col] =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      const newGrid = grid.map((r) => [...r]);
       newGrid[row][col] = solution[row][col];
       setGrid(newGrid);
-      
+
       if (checkWin(newGrid)) {
         onComplete();
       }
@@ -198,17 +207,19 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
   if (!difficulty || grid.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[600px] text-white">
-        <h2 className="text-4xl font-bold mb-8 text-rose-500">¿Qué tan difícil quieres el desafío?</h2>
+        <h2 className="mb-8 text-4xl font-bold text-amber-200">
+          ¿Qué tan difícil quieres el desafío?
+        </h2>
         <div className="flex gap-6">
           <button
             onClick={() => setDifficulty("easy")}
-            className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl text-xl font-bold hover:scale-105 transition-transform shadow-lg"
+            className="btn-ofrenda px-8 py-4 text-xl normal-case tracking-normal"
           >
             Fácil 😊
           </button>
           <button
             onClick={() => setDifficulty("intermediate")}
-            className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl text-xl font-bold hover:scale-105 transition-transform shadow-lg"
+            className="rounded-2xl border-2 border-[#c77dff] bg-gradient-to-r from-[#5a189a] to-[#9d0208] px-8 py-4 text-xl font-bold uppercase tracking-[0.08em] text-amber-50 shadow-lg transition-transform hover:scale-105"
           >
             Intermedio 😏
           </button>
@@ -220,8 +231,8 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <MusicPlayer audioSrc="/music/background4.mp3" autoPlay={true} />
-      
-      <div className="flex flex-col lg:flex-row gap-12 items-center justify-center bg-[#111111] p-8 sm:p-20 rounded-[3rem] border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.8)] relative">
+
+      <div className="ofrenda-card relative flex flex-col items-center justify-center gap-12 p-8 sm:flex-row sm:p-16">
         {/* Sudoku Grid Container */}
         <div className="bg-white p-1 rounded-sm shadow-2xl select-none mx-auto overflow-hidden">
           <table className="border-collapse border-[3px] border-gray-900 table-fixed">
@@ -229,14 +240,20 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
               {grid.map((row, rowIndex) => (
                 <tr key={`row-${rowIndex}`}>
                   {row.map((cellValue, colIndex) => {
-                    const isInitial = PUZZLES[difficulty].initial[rowIndex][colIndex] !== 0;
-                    const isSelected = selectedCell?.[0] === rowIndex && selectedCell?.[1] === colIndex;
-                    
+                    const isInitial =
+                      PUZZLES[difficulty].initial[rowIndex][colIndex] !== 0;
+                    const isSelected =
+                      selectedCell?.[0] === rowIndex &&
+                      selectedCell?.[1] === colIndex;
+
                     // Borders: Thick every 3rd cell
-                    const isBoldRight = (colIndex + 1) % 3 === 0 && colIndex !== 8;
-                    const isBoldBottom = (rowIndex + 1) % 3 === 0 && rowIndex !== 8;
-                    
-                    const solve = PUZZLES[difficulty].solution[rowIndex][colIndex];
+                    const isBoldRight =
+                      (colIndex + 1) % 3 === 0 && colIndex !== 8;
+                    const isBoldBottom =
+                      (rowIndex + 1) % 3 === 0 && rowIndex !== 8;
+
+                    const solve =
+                      PUZZLES[difficulty].solution[rowIndex][colIndex];
                     const isCorrect = cellValue !== 0 && cellValue === solve;
                     const isWrong = cellValue !== 0 && cellValue !== solve;
 
@@ -245,9 +262,9 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
                         key={`cell-${rowIndex}-${colIndex}`}
                         onClick={() => handleCellClick(rowIndex, colIndex)}
                         style={{
-                          width: 'clamp(36px, 8vw, 56px)',
-                          height: 'clamp(36px, 8vw, 56px)',
-                          padding: 0
+                          width: "clamp(36px, 8vw, 56px)",
+                          height: "clamp(36px, 8vw, 56px)",
+                          padding: 0,
                         }}
                         className={`
                           relative text-xl sm:text-2xl font-bold cursor-pointer
@@ -258,8 +275,8 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
                           ${isInitial ? "bg-gray-100 text-gray-900" : "bg-white"}
                           ${!isInitial && isCorrect ? "text-blue-600" : ""}
                           ${!isInitial && isWrong ? "text-red-500" : ""}
-                          ${isSelected ? "z-10 ring-[3px] sm:ring-[4px] ring-rose-400 ring-inset bg-rose-50" : ""}
-                          hover:bg-rose-50/50 select-none
+                          ${isSelected ? "z-10 bg-amber-50 ring-[3px] ring-inset ring-amber-500 sm:ring-[4px]" : ""}
+                          select-none hover:bg-amber-50/50
                         `}
                       >
                         {cellValue !== 0 ? cellValue : ""}
@@ -279,7 +296,7 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
               <button
                 key={num}
                 onClick={() => handleNumberInput(num)}
-                className="h-16 sm:h-20 bg-white/5 hover:bg-rose-500/20 border border-white/10 rounded-2xl text-white text-3xl font-bold backdrop-blur-sm transition-all shadow-md active:scale-95 flex items-center justify-center hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] hover:border-rose-500/40"
+                className="flex h-16 items-center justify-center rounded-2xl border border-amber-200/20 bg-white/5 text-3xl font-bold text-amber-50 shadow-md backdrop-blur-sm transition-all hover:border-amber-400/50 hover:bg-[#e85d04]/20 hover:shadow-[0_0_15px_rgba(232,93,4,0.35)] active:scale-95 sm:h-20"
               >
                 {num}
               </button>
@@ -289,7 +306,7 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
           <div className="flex flex-col gap-4">
             <button
               onClick={handleHelp}
-              className="py-6 bg-gradient-to-r from-rose-500 to-pink-600 rounded-2xl text-white font-bold text-xl shadow-xl hover:scale-105 transition-transform flex items-center justify-center gap-3 border-b-4 border-rose-800 active:border-b-0 active:translate-y-1"
+              className="btn-ofrenda w-full gap-3 border-b-4 border-[#9d0208] py-6 text-xl normal-case tracking-normal active:translate-y-1 active:border-b-0"
             >
               <span className="text-2xl">💡</span> Necesito ayuda
             </button>
@@ -301,7 +318,7 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
               🎉 Revelar sorpresa
             </button>
           </div>
-          
+
           <button
             onClick={() => setDifficulty(null)}
             className="text-white/40 hover:text-white transition-colors text-sm text-center"
@@ -334,8 +351,12 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
                   >
                     💖
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">¡Correcto, mi amor!</h3>
-                  <p className="text-gray-600">Revelando un número para ayudarte...</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    ¡Correcto, mi amor!
+                  </h3>
+                  <p className="text-gray-600">
+                    Revelando un número para ayudarte...
+                  </p>
                 </div>
               ) : (
                 <>
@@ -350,7 +371,7 @@ export default function SudokuGame({ onComplete }: SudokuGameProps) {
                       <button
                         key={index}
                         onClick={() => handleAnswer(index)}
-                        className="w-full py-4 px-6 text-left border-2 border-gray-100 rounded-2xl hover:border-rose-400 hover:bg-rose-50 transition-all text-gray-700 font-medium"
+                        className="w-full rounded-2xl border-2 border-amber-100 px-6 py-4 text-left font-medium text-gray-700 transition-all hover:border-amber-400 hover:bg-amber-50"
                       >
                         {option}
                       </button>

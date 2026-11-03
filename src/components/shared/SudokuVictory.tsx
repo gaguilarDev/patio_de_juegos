@@ -46,14 +46,26 @@ const ConfettiParticle = ({ delay }: { delay: number }) => {
   const randomX = Math.random() * 100;
   const randomRotation = Math.random() * 360;
   const randomDuration = 2 + Math.random() * 3;
-  const colors = ["#f43f5e", "#e11d48", "#be123c", "#fda4af", "#fb7185", "#ff6b9d"];
+  const colors = [
+    "#f43f5e",
+    "#e11d48",
+    "#be123c",
+    "#fda4af",
+    "#fb7185",
+    "#ff6b9d",
+  ];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const shapes = ["⭐", "✨", "🌟", "💫", "🌹"];
   const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
 
   return (
     <motion.div
-      initial={{ y: -20, x: `${randomX}vw`, opacity: 1, rotate: randomRotation }}
+      initial={{
+        y: -20,
+        x: `${randomX}vw`,
+        opacity: 1,
+        rotate: randomRotation,
+      }}
       animate={{
         y: "100vh",
         rotate: randomRotation + 720,
@@ -201,7 +213,7 @@ export default function SudokuVictory() {
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-2 h-6 bg-rose-400 ml-1"
+                className="ml-1 inline-block h-6 w-2 bg-amber-400"
               />
             </pre>
           </div>

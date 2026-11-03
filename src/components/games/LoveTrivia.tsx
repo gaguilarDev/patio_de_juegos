@@ -22,7 +22,7 @@ const questions: Question[] = [
       "El Barrendero",
       "La Reina de las Lágrimas",
       "El Libro de la Selva",
-      "El Libro de la Vida"
+      "El Libro de la Vida",
     ],
     correctAnswer: 3, // El Libro de la Selva
   },
@@ -33,7 +33,7 @@ const questions: Question[] = [
       "29/06/1998",
       "29/07/1998",
       "29/05/1998",
-      "21/01/1998"
+      "21/01/1998",
     ],
     correctAnswer: 0, // 29/08/1998
   },
@@ -44,19 +44,13 @@ const questions: Question[] = [
       "Nan de las Nieves de Tetela",
       "Amor",
       "Nancharanda",
-      "Nan de Tetela"
+      "Nan de Tetela",
     ],
     correctAnswer: 3, // Nancharanda
   },
   {
     question: "¿Cuánto te quiero?",
-    options: [
-      "Poquito",
-      "Poco",
-      "Mucho",
-      "Muchísimo",
-      "Nanchísimo"
-    ],
+    options: ["Poquito", "Poco", "Mucho", "Muchísimo", "Nanchísimo"],
     correctAnswer: 4, // Nanchísimo
   },
   {
@@ -66,7 +60,7 @@ const questions: Question[] = [
       "27/01/2025",
       "29/01/2026",
       "22/01/2026",
-      "27/01/2026"
+      "27/01/2026",
     ],
     correctAnswer: 4, // 27/01/2026
   },
@@ -128,9 +122,11 @@ export default function LoveTrivia({ onComplete }: LoveTriviaProps) {
           </div>
           <div className="w-full bg-white/20 rounded-full h-2">
             <motion.div
-              className="bg-gradient-to-r from-pink-500 to-rose-500 h-2 rounded-full"
+              className="h-2 rounded-full bg-gradient-to-r from-[#ffb703] to-[#9d0208]"
               initial={{ width: 0 }}
-              animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              animate={{
+                width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+              }}
               transition={{ duration: 0.5 }}
             />
           </div>
@@ -143,7 +139,7 @@ export default function LoveTrivia({ onComplete }: LoveTriviaProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl"
+            className="ofrenda-card p-8 backdrop-blur-md"
           >
             {/* Question */}
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
@@ -155,7 +151,7 @@ export default function LoveTrivia({ onComplete }: LoveTriviaProps) {
               {currentQ.options.map((option, index) => {
                 const isSelected = selectedAnswer === index;
                 const isCorrectAnswer = index === currentQ.correctAnswer;
-                
+
                 let bgColor = "bg-white/10 hover:bg-white/20";
                 if (showFeedback) {
                   if (isCorrectAnswer) {

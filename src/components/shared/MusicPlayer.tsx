@@ -56,7 +56,7 @@ export default function MusicPlayer({
       <audio ref={audioRef} src={audioSrc} loop={loop} preload="auto" />
 
       <div
-        className="fixed top-5 right-5 z-50 flex items-center gap-2"
+        className="fixed right-5 top-9 z-50 flex items-center gap-2"
         onMouseEnter={() => setShowVolumeSlider(true)}
         onMouseLeave={() => setShowVolumeSlider(false)}
       >
@@ -79,7 +79,7 @@ export default function MusicPlayer({
             onChange={handleVolumeChange}
             className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
             style={{
-              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
+              background: `linear-gradient(to right, rgb(232 93 4) 0%, rgb(232 93 4) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
             }}
           />
         </motion.div>

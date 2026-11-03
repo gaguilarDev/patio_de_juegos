@@ -10,16 +10,17 @@ export default function TextFooter2() {
     <>
       {/* Left Text */}
       <h1
-        className={`absolute left-10 bottom-5 transform -translate-y-1/2 text-white text-5xl font-bold leading-tight ${playfairDisplay.className}`}
+        className={`absolute bottom-5 left-10 -translate-y-1/2 text-5xl font-bold leading-tight text-amber-50 ${playfairDisplay.className}`}
       >
-        <span className="text-gray-400">Ordena</span> <br /> las palabras
+        <span className="text-amber-200/70">Ordena</span> <br /> las palabras
       </h1>
 
       {/* Right Text */}
       <h1
-        className={`absolute right-10 bottom-5 transform -translate-y-1/2 text-white text-5xl font-bold leading-tight text-right ${playfairDisplay.className}`}
+        className={`absolute bottom-5 right-10 -translate-y-1/2 text-right text-5xl font-bold leading-tight text-amber-50 ${playfairDisplay.className}`}
       >
-        para revelar <br /> <span className="text-gray-400">la sorpresa</span>
+        para revelar <br />{" "}
+        <span className="text-amber-200/70">la sorpresa</span>
       </h1>
     </>
   );

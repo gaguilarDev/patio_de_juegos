@@ -117,15 +117,10 @@ export default function ValentinesProposal() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {/* Audio player for winner music */}
-      <audio
-        ref={audioRef}
-        src="/music/winner.mp3"
-        loop
-        preload="auto"
-      />
+      <audio ref={audioRef} src="/music/winner.mp3" loop preload="auto" />
 
       {/* Music controls */}
-      <div 
+      <div
         className="fixed top-5 right-5 z-50 flex items-center gap-2"
         onMouseEnter={() => setShowVolumeSlider(true)}
         onMouseLeave={() => setShowVolumeSlider(false)}
@@ -133,9 +128,9 @@ export default function ValentinesProposal() {
         {/* Volume slider */}
         <motion.div
           initial={{ width: 0, opacity: 0 }}
-          animate={{ 
+          animate={{
             width: showVolumeSlider ? 120 : 0,
-            opacity: showVolumeSlider ? 1 : 0
+            opacity: showVolumeSlider ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
           className="overflow-hidden"
@@ -149,7 +144,7 @@ export default function ValentinesProposal() {
             onChange={handleVolumeChange}
             className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
             style={{
-              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`
+              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
             }}
           />
         </motion.div>
@@ -161,13 +156,40 @@ export default function ValentinesProposal() {
           aria-label="Toggle music"
         >
           {isMusicPlaying ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+              />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
+              />
             </svg>
           )}
         </button>
@@ -234,7 +256,7 @@ export default function ValentinesProposal() {
             />
             <div className="flex space-x-4 mt-10">
               <button
-                className="px-6 py-2 text-lg font-semibold text-white bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl hover:from-pink-600 hover:to-rose-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="btn-ofrenda px-6 py-3 text-base normal-case tracking-normal"
                 onClick={handleYesClick}
               >
                 ¡Sí, claro! 🥰

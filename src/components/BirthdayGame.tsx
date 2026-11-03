@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import PuzzleGame from "./games/PuzzleGame";
 import LoveTrivia from "./games/LoveTrivia";
 import VictoryMessage from "./shared/VictoryMessage";
-import SnowFall from "./shared/SnowFall";
 
 type GameStage = "puzzle" | "trivia" | "victory";
 
@@ -32,9 +31,7 @@ export default function BirthdayGame() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black relative">
-      <SnowFall />
-      
+    <div className="relative flex min-h-screen items-center justify-center py-16">
       <AnimatePresence mode="wait">
         {!isTransitioning && (
           <motion.div
@@ -45,8 +42,12 @@ export default function BirthdayGame() {
             transition={{ duration: TRANSITION_DURATION }}
             className="w-full"
           >
-            {stage === "puzzle" && <PuzzleGame onComplete={handlePuzzleComplete} />}
-            {stage === "trivia" && <LoveTrivia onComplete={handleTriviaComplete} />}
+            {stage === "puzzle" && (
+              <PuzzleGame onComplete={handlePuzzleComplete} />
+            )}
+            {stage === "trivia" && (
+              <LoveTrivia onComplete={handleTriviaComplete} />
+            )}
             {stage === "victory" && <VictoryMessage />}
           </motion.div>
         )}
@@ -57,13 +58,13 @@ export default function BirthdayGame() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 flex items-center justify-center bg-black/80 z-50"
+          className="absolute inset-0 z-50 flex items-center justify-center bg-[#12080c]/80"
         >
           <div className="text-center">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-16 h-16 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"
+              className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-amber-400 border-t-transparent"
             />
             <p className="text-white text-xl">Cargando siguiente sorpresa...</p>
           </div>

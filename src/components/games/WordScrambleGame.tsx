@@ -33,11 +33,15 @@ const scrambleWord = (word: string): string => {
   return scrambled === word ? scrambleWord(word) : scrambled;
 };
 
-export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) {
+export default function WordScrambleGame({
+  onComplete,
+}: WordScrambleGameProps) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [scrambledWord, setScrambledWord] = useState("");
   const [userInput, setUserInput] = useState("");
-  const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
+  const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(
+    null,
+  );
   const [completedWords, setCompletedWords] = useState<string[]>([]);
 
   // Initialize scrambled word
@@ -49,14 +53,14 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const normalizedInput = userInput.toLowerCase().trim();
     const correctWord = WORDS[currentWordIndex].toLowerCase();
 
     if (normalizedInput === correctWord) {
       setFeedback("correct");
       setCompletedWords([...completedWords, WORDS[currentWordIndex]]);
-      
+
       setTimeout(() => {
         if (currentWordIndex + 1 < WORDS.length) {
           setCurrentWordIndex(currentWordIndex + 1);
@@ -84,7 +88,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <MusicPlayer audioSrc="/music/background3.mp3" autoPlay={true} />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -122,9 +126,11 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
           <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: `${(completedWords.length / WORDS.length) * 100}%` }}
+              animate={{
+                width: `${(completedWords.length / WORDS.length) * 100}%`,
+              }}
               transition={{ duration: 0.5 }}
-              className="h-full bg-gradient-to-r from-pink-500 to-rose-500"
+              className="h-full bg-gradient-to-r from-[#ffb703] to-[#9d0208]"
             />
           </div>
         </motion.div>
@@ -134,7 +140,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20"
+          className="ofrenda-card p-8 backdrop-blur-xl"
         >
           {/* Scrambled Word */}
           <div className="text-center mb-8">
@@ -146,7 +152,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
                 animate={{ scale: 1, opacity: 1, rotateX: 0 }}
                 exit={{ scale: 0.8, opacity: 0, rotateX: 90 }}
                 transition={{ duration: 0.5 }}
-                className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 tracking-wider"
+                className="bg-gradient-to-r from-[#ffe08a] to-[#e85d04] bg-clip-text text-6xl font-bold tracking-wider text-transparent"
               >
                 {scrambledWord}
               </motion.div>
@@ -156,7 +162,10 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
           {/* Input Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="word-input" className="block text-white/70 text-sm mb-2">
+              <label
+                htmlFor="word-input"
+                className="block text-white/70 text-sm mb-2"
+              >
                 Tu respuesta:
               </label>
               <input
@@ -164,7 +173,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
                 type="text"
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                className="w-full px-6 py-4 bg-white/5 border-2 border-white/20 rounded-xl text-white text-xl text-center focus:outline-none focus:border-pink-500 transition-all duration-300"
+                className="w-full rounded-xl border-2 border-white/20 bg-white/5 px-6 py-4 text-center text-xl text-white transition-all duration-300 focus:border-amber-400 focus:outline-none"
                 placeholder="Escribe la palabra..."
                 autoComplete="off"
                 autoFocus
@@ -184,7 +193,9 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
                       : "bg-red-500/20 text-red-300"
                   }`}
                 >
-                  {feedback === "correct" ? "¡Correcto! 🎉" : "Intenta de nuevo 💭"}
+                  {feedback === "correct"
+                    ? "¡Correcto! 🎉"
+                    : "Intenta de nuevo 💭"}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -194,7 +205,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
               <button
                 type="submit"
                 disabled={!userInput.trim() || feedback === "correct"}
-                className="flex-1 px-6 py-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+                className="btn-ofrenda min-w-0 flex-1 px-6 py-4 text-base normal-case tracking-normal disabled:cursor-not-allowed"
               >
                 Verificar
               </button>
@@ -237,7 +248,7 @@ export default function WordScrambleGame({ onComplete }: WordScrambleGameProps) 
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="px-4 py-2 bg-gradient-to-r from-pink-500/20 to-rose-500/20 border border-pink-500/30 rounded-full text-pink-300 text-sm font-medium"
+                  className="chip-ofrenda"
                 >
                   {word} ✓
                 </motion.span>

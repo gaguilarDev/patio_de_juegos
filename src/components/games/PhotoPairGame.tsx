@@ -154,7 +154,7 @@ export default function PhotoPairGame({
 
       {/* Music controls */}
       <div
-        className="fixed top-5 right-5 z-50 flex items-center gap-2"
+        className="fixed right-5 top-9 z-50 flex items-center gap-2"
         onMouseEnter={() => setShowVolumeSlider(true)}
         onMouseLeave={() => setShowVolumeSlider(false)}
       >
@@ -177,7 +177,7 @@ export default function PhotoPairGame({
             onChange={handleVolumeChange}
             className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
             style={{
-              background: `linear-gradient(to right, rgb(236 72 153) 0%, rgb(236 72 153) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
+              background: `linear-gradient(to right, rgb(232 93 4) 0%, rgb(232 93 4) ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`,
             }}
           />
         </motion.div>
@@ -248,7 +248,7 @@ export default function PhotoPairGame({
               {/* Back of the card */}
               {!selected.includes(index) && !matched.includes(index) && (
                 <motion.div
-                  className="w-full h-full bg-gray-300 rounded-md absolute"
+                  className="absolute h-full w-full overflow-hidden rounded-md border border-amber-200/50"
                   initial={{ rotateY: 0 }}
                   animate={{
                     rotateY:
@@ -258,7 +258,15 @@ export default function PhotoPairGame({
                   }}
                   transition={{ duration: 0.5 }}
                   style={{ backfaceVisibility: "hidden" }}
-                />
+                >
+                  <Image
+                    src="/ofrenda/dorso.jpg"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                </motion.div>
               )}
 
               {/* Front of the card (image) */}

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import PhotoPairGame from "./games/PhotoPairGame";
 import ValentinesProposal from "./games/ValentinesProposal";
-import SnowFall from "./shared/SnowFall";
 import TextFooter from "./shared/TextFooter";
 
 const ANIM_DURATION = 2;
@@ -21,8 +20,7 @@ export default function MesarioGame() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black relative px-10">
-      <SnowFall />
+    <div className="relative flex min-h-screen items-center justify-center px-10 py-16">
       {!showValentinesProposal ? (
         <motion.div
           initial={{ opacity: 1 }}
