@@ -1,6 +1,6 @@
 "use client";
 
-import SnowFall from "./SnowFall";
+import MarigoldFall from "./MarigoldFall";
 
 export default function AmbientScene() {
   return (
@@ -11,7 +11,7 @@ export default function AmbientScene() {
       <div className="ambient-orb ambient-orb-pink" />
       <div className="ambient-orb ambient-orb-violet" />
       <div className="ambient-orb ambient-orb-amber" />
-      <SnowFall />
+      <MarigoldFall />
     </div>
   );
 }

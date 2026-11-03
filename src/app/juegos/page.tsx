@@ -12,7 +12,7 @@ export default function JuegosPage() {
   return (
     <EventMenu
       title="Juegos y cuestionarios"
-      subtitle="Elige la fecha que quieres celebrar"
+      subtitle="Las fechas están separadas: primero los juegos, después el cuestionario y al final la experiencia."
       items={games}
       backHref="/"
       backLabel="Volver al patio"

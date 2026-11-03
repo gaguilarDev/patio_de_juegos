@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FormEvent, useEffect, useState } from "react";
 import AmbientScene from "@/components/shared/AmbientScene";
 import BackLink from "@/components/shared/BackLink";
+import PapelPicado from "@/components/shared/PapelPicado";
 import { THEME_STYLES } from "@/components/invitations/themes";
 import type { CardTheme } from "@/lib/cards";
 
@@ -54,8 +55,9 @@ export default function CrearInvitacion() {
   }
 
   return (
-    <div className="relative min-h-screen bg-black px-4 py-12 flex justify-center">
+    <div className="bg-ofrenda relative flex min-h-screen justify-center px-4 py-12">
       <AmbientScene />
+      <PapelPicado />
       <BackLink href="/cartas" label="Volver a cartas" />
 
       <motion.div
@@ -93,10 +95,7 @@ export default function CrearInvitacion() {
               className={`${field} text-center text-sm`}
             />
             <div className="flex flex-wrap gap-3 justify-center mt-5">
-              <button
-                onClick={copy}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold"
-              >
+              <button onClick={copy} className="btn-ofrenda">
                 {copied ? "¡Copiado! ✓" : "Copiar enlace"}
               </button>
               <a
@@ -239,7 +238,7 @@ export default function CrearInvitacion() {
 
             <button
               disabled={busy}
-              className="w-full py-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold text-lg shadow-lg disabled:opacity-60 hover:shadow-pink-500/30 transition"
+              className="btn-ofrenda w-full py-4 text-base"
             >
               {busy ? "Creando…" : "Crear invitación ✨"}
             </button>

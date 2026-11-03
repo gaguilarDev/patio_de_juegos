@@ -80,7 +80,7 @@ input[type="range"].slider::-moz-range-thumb:hover {
   height: 34rem;
   left: -8rem;
   top: -6rem;
-  background: #be185d;
+  background: #9d0208;
 }
 
 .ambient-orb-violet {
@@ -88,7 +88,7 @@ input[type="range"].slider::-moz-range-thumb:hover {
   height: 28rem;
   right: -8rem;
   top: 18%;
-  background: #6d28d9;
+  background: #5a189a;
   animation-duration: 22s;
   animation-delay: -7s;
 }
@@ -98,9 +98,118 @@ input[type="range"].slider::-moz-range-thumb:hover {
   height: 26rem;
   left: 28%;
   bottom: -10rem;
-  background: #b45309;
+  background: #e85d04;
   animation-duration: 20s;
   animation-delay: -12s;
+}
+
+.bg-ofrenda {
+  background:
+    radial-gradient(
+      ellipse at 50% -10%,
+      rgba(232, 93, 4, 0.28),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 100% 80%,
+      rgba(90, 24, 154, 0.35),
+      transparent 42%
+    ),
+    #12080c;
+}
+
+.ofrenda-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(42, 18, 24, 0.94), rgba(16, 7, 10, 0.96))
+      padding-box,
+    linear-gradient(145deg, #ffd166, #e85d04 38%, #9d0208 70%, #7b2cbf)
+      border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+}
+
+.ofrenda-card::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 1.15rem;
+  border: 1px dashed rgba(255, 209, 102, 0.38);
+  pointer-events: none;
+}
+
+.btn-ofrenda {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 9.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 2px solid #ffe8a3;
+  background: linear-gradient(180deg, #ffe08a 0%, #f4a261 42%, #e85d04 100%);
+  color: #3b1608;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  line-height: 1;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 8px 18px rgba(232, 93, 4, 0.38);
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.group:hover .btn-ofrenda,
+.btn-ofrenda:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn-ofrenda:disabled {
+  opacity: 0.6;
+  transform: none;
+}
+
+.chip-ofrenda,
+.chip-quiet {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.chip-ofrenda {
+  border: 1px solid rgba(255, 209, 102, 0.75);
+  background: rgba(255, 183, 3, 0.16);
+  color: #ffe8a3;
+}
+
+.chip-quiet {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.petal {
+  position: absolute;
+  top: -12%;
+  border-radius: 70% 0 70% 0;
+  animation: petal-fall linear infinite;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(36px, 112vh, 0) rotate(320deg);
+  }
 }
 
 .card-shine {
@@ -142,7 +251,8 @@ input[type="range"].slider::-moz-range-thumb:hover {
 @media (prefers-reduced-motion: reduce) {
   .animate-fall,
   .ambient-orb,
-  .card-shine {
+  .card-shine,
+  .petal {
     animation: none;
   }
 }

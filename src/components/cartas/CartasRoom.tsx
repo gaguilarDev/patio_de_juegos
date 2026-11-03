@@ -5,14 +5,16 @@ import { motion } from "framer-motion";
 import { THEME_STYLES } from "@/components/invitations/themes";
 import AmbientScene from "@/components/shared/AmbientScene";
 import BackLink from "@/components/shared/BackLink";
+import PapelPicado from "@/components/shared/PapelPicado";
 import type { CardTheme } from "@/lib/cards";
 
 const themes = Object.keys(THEME_STYLES) as CardTheme[];
 
 export default function CartasRoom() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-black px-4 py-16">
+    <div className="bg-ofrenda relative flex min-h-screen items-center justify-center px-4 py-16">
       <AmbientScene />
+      <PapelPicado />
       <BackLink href="/" label="Volver al patio" />
 
       <motion.div
@@ -30,10 +32,10 @@ export default function CartasRoom() {
           >
             💌
           </motion.p>
-          <h1 className="font-script text-6xl text-pink-200 sm:text-7xl">
+          <h1 className="font-script text-6xl text-amber-50 sm:text-7xl">
             Cartas
           </h1>
-          <p className="mx-auto mt-3 max-w-lg text-white/75">
+          <p className="mx-auto mt-3 max-w-lg text-amber-50/75">
             Este cuarto es solo para invitaciones. Elige un estilo, adjunta una
             canción y comparte el enlace.
           </p>
@@ -48,7 +50,7 @@ export default function CartasRoom() {
             stiffness: 90,
             damping: 16,
           }}
-          className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-xl sm:p-8"
+          className="ofrenda-card p-6 sm:p-8"
         >
           <span className="card-shine" />
           <div className="grid gap-4 sm:grid-cols-3">
@@ -73,13 +75,13 @@ export default function CartasRoom() {
           </div>
 
           <div className="mt-8 flex flex-col items-center gap-3 text-center">
-            <p className="text-white/70">
+            <p className="text-amber-50/70">
               La carta que crees abre en su propia página, con música y el
               mensaje que escribiste.
             </p>
             <Link
               href="/invitaciones"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 to-rose-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition duration-300 hover:gap-3 hover:shadow-amber-400/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
+              className="btn-ofrenda focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
             >
               Crear una carta
               <span aria-hidden="true">→</span>
